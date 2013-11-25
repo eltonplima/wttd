@@ -1,19 +1,17 @@
 {% extends "base_site.html" %}
 {% load staticfiles %}
 
+{% block masthead %}
+    <h3 class="text-muted">Bem vindo ao EventeX</h3>
+{% endblock %}
+
 {% block jumbotron %}
 <img src="{% static "img/logo.png" %}"/>
-<p>O evento mais sensacional do ano depois do Dev in Rio!</p>
-<p>Você não pode perder esta oportunidade!</p>
-<p>Abertura das inscrições no próximo domingo.</p>
-<p>Para dúvidas e mais informações entre em contato pelo email <a href="mailto:contato@eventex.com.br?Subject=Contato" target="_top">contato@eventex.com.br</a></p>
+
+<p class="lead">O evento mais sensacional do ano depois do Dev in Rio!</p>
+<p class="lead">Você não pode perder esta oportunidade!</p>
+<p class="lead">Abertura das inscrições no próximo domingo.</p>
+
+<p><a class="btn btn-lg btn-info" href="mailto:contato@eventex.com.br?Subject=Contato" target="_top">Fale conosco</a></p>
 {% endblock jumbotron %}
 
-{% block container %}
-<div class="row">
-    <div class="col-md-12">
-        <h1 class="text-center">Bem vindo ao EventeX</h1>
-
-    </div>
-</div>
-{% endblock container %}
