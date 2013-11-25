@@ -17,7 +17,16 @@
   </head>
   <body>
     {% block content %}
-    <h1>Refactory!!!</h1>
+        <div class="jumbotron text-center">
+            <div class="container">
+                {% block jumbotron %}
+                {% endblock jumbotron%}
+            </div>
+        </div>
+        <div class="container">
+            {% block container %}
+            {% endblock container %}
+        </div>
     {% endblock content %}
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://code.jquery.com/jquery.js"></script>
