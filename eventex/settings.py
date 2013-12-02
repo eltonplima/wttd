@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import dj_database_url
 from unipath import Path
 BASE_DIR = Path(__file__).parent
+PROJECT_NAME = BASE_DIR.rsplit('/', 1)[-1]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -34,7 +35,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'eventex.core',
+    '%s.core' % PROJECT_NAME,
 )
 
 MIDDLEWARE_CLASSES = (
@@ -46,16 +47,16 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'eventex.urls'
+ROOT_URLCONF = '%s.urls' % PROJECT_NAME
 
-WSGI_APPLICATION = 'eventex.wsgi.application'
+WSGI_APPLICATION = '%s.wsgi.application' % PROJECT_NAME
 
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///' + BASE_DIR.child('db.sqlite3'))
+    'default': dj_database_url.config(default='sqlite:///' + BASE_DIR.child('%s.sqlite3' % PROJECT_NAME))
 }
 
 # Internationalization
