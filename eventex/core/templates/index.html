@@ -5,13 +5,14 @@
     <h3 class="text-muted">Bem vindo ao EventeX</h3>
 {% endblock %}
 
-{% block jumbotron %}
-<img src="{% static "img/logo.png" %}"/>
+{% block jumbotron_css %}text-center{% endblock jumbotron_css %}
 
+{% block jumbotron %}
+{{ block.super }}
 <p class="lead">O evento mais sensacional do ano depois do Dev in Rio!</p>
 <p class="lead">Você não pode perder esta oportunidade!</p>
 <p class="lead">Abertura das inscrições no próximo domingo.</p>
-
+<p><strong><a href="/inscricao/">Inscreva-se já!</a></strong></p>
 <p><a class="btn btn-lg btn-info" href="mailto:contato@eventex.com.br?Subject=Contato" target="_top">Fale conosco</a></p>
 {% endblock jumbotron %}
 
