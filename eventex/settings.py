@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     '%s.core' % PROJECT_NAME,
     '%s.subscriptions' % PROJECT_NAME,
 )
