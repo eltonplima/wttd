@@ -11,8 +11,7 @@ def subscribe(request):
     if request.method == 'POST':
         form = SubscriptionForm(request.POST)
         if form.is_valid():
-            obj = Subscription(**form.cleaned_data)
-            obj.save()
+            obj = form.save()
 
             url = reverse('subscribe', args=(obj.id,))
 
