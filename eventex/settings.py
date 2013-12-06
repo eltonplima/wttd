@@ -7,8 +7,9 @@ https://docs.djangoproject.com/en/1.6/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
-import dj_database_url
+from dj_database_url import parse as db_url
 from unipath import Path
+from decouple import config
 BASE_DIR = Path(__file__).parent
 PROJECT_NAME = BASE_DIR.rsplit('/', 1)[-1]
 
@@ -16,14 +17,14 @@ PROJECT_NAME = BASE_DIR.rsplit('/', 1)[-1]
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'wpeo(!(y*14ga%q8wak9n**c!^p0^pjw-sqg70e0j$0+r8_ko%'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -36,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     '%s.core' % PROJECT_NAME,
+    '%s.subscriptions' % PROJECT_NAME,
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,7 +58,10 @@ WSGI_APPLICATION = '%s.wsgi.application' % PROJECT_NAME
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///' + BASE_DIR.child('%s.sqlite3' % PROJECT_NAME))
+    'default': config(
+        'DATABASE_URL',
+        default='sqlite:///' + BASE_DIR.child('%s.sqlite3' % PROJECT_NAME),
+        cast=db_url),
 }
 
 # Internationalization
