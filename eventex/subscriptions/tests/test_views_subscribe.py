@@ -1,5 +1,7 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from eventex.subscriptions.forms import SubscriptionForm
+from eventex.subscriptions.models import Subscription
 
 
 class SubscribeTest(TestCase):
@@ -32,11 +34,35 @@ class SubscribeTest(TestCase):
         form = self.resp.context['form']
         self.assertIsInstance(form, SubscriptionForm)
 
-    def test_form_has_fields(self):
-        'Form must have 4 fields'
-        form = self.resp.context['form']
-        fields = ['name',
-                  'email',
-                  'cpf',
-                  'phone']
-        self.assertItemsEqual(fields, form.fields)
+
+class SubscribePostTest(TestCase):
+    def setUp(self):
+        data = dict(name='Elton Pereira',
+                    cpf='12345678901',
+                    email='eltonplima@gmail.com',
+                    phone='82-96317900')
+        self.resp = self.client.post(reverse('subscribe'), data)
+
+    def test_post(self):
+        self.assertEqual(302, self.resp.status_code)
+
+    def test_save(self):
+        self.assertTrue(Subscription.objects.exists())
+
+
+class SubscribeInvalidPostTest(TestCase):
+    def setUp(self):
+        data = dict(name='Elton Pereira',
+                    cpf='000000000066',
+                    email='eltonplima@gmail.com',
+                    phone='82-96317900')
+        self.resp = self.client.post(reverse('subscribe'), data)
+
+    def test_post(self):
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_form_errors(self):
+        self.assertTrue(self.resp.context['form'].errors)
+
+    def test_dont_save(self):
+        self.assertFalse(Subscription.objects.exists())
