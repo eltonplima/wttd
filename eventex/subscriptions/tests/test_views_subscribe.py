@@ -9,7 +9,7 @@ class SubscribeTest(TestCase):
         self.resp = self.client.get('/inscricao/')
 
     def test_reverse(self):
-        url = reverse('subscribe')
+        url = reverse('subscription:subscribe')
         self.assertEqual('/inscricao/', url)
 
     def test_get(self):
@@ -45,7 +45,7 @@ class SubscribePostTest(TestCase):
                     cpf='12345678901',
                     email='eltonplima@gmail.com',
                     phone='82-96317900')
-        self.resp = self.client.post(reverse('subscribe'), data)
+        self.resp = self.client.post(reverse('subscription:subscribe'), data)
 
     def test_post(self):
         self.assertEqual(302, self.resp.status_code)
@@ -60,7 +60,7 @@ class SubscribeInvalidPostTest(TestCase):
                     cpf='000000000066',
                     email='eltonplima@gmail.com',
                     phone='82-96317900')
-        self.resp = self.client.post(reverse('subscribe'), data)
+        self.resp = self.client.post(reverse('subscription:subscribe'), data)
 
     def test_post(self):
         self.assertEqual(200, self.resp.status_code)

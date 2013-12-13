@@ -12,7 +12,7 @@ class DetailTest(TestCase):
                     phone='82-96317900')
         s = Subscription.objects.create(**data)
 
-        url = reverse('detail', args=(s.id,))
+        url = reverse('subscription:detail', args=(s.id,))
 
         self.resp = self.client.get(url)
 
@@ -20,7 +20,7 @@ class DetailTest(TestCase):
         self.assertEqual(200, self.resp.status_code)
 
     def test_reverse(self):
-        url = reverse('detail', args=(1,))
+        url = reverse('subscription:detail', args=(1,))
         self.assertEqual('/inscricao/1/', url)
 
     def test_template(self):
@@ -37,6 +37,6 @@ class DetailTest(TestCase):
 
 class DetailNotFound(TestCase):
     def test_not_found(self):
-        url = reverse('detail', args=(0,))
+        url = reverse('subscription:detail', args=(0,))
         resp = self.client.get(url)
         self.assertEqual(404, resp.status_code)

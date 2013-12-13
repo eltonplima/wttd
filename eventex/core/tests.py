@@ -1,8 +1,10 @@
 # coding: utf-8
 from django.test import TestCase
+from django.core.urlresolvers import reverse
+
 class HomeTest(TestCase):
     def setUp(self):
-        self.resp = self.client.get('/')
+        self.resp = self.client.get(reverse('core:home'))
 
     def test_get(self):
         """

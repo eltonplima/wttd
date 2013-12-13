@@ -30,7 +30,7 @@ def create(request):
                       data)
 
     obj = form.save()
-    url = reverse('detail', args=(obj.id,))
+    url = reverse('subscription:detail', args=(obj.id,))
 
     return HttpResponseRedirect(url)
 
