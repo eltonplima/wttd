@@ -9,6 +9,7 @@ class Subscription(models.Model):
     email = models.EmailField(_(u'email'), unique=True)
     phone = models.CharField(_(u'telefone'), max_length=20, blank=True)
     created_at = models.DateTimeField(_(u'criado em'), auto_now_add=True)
+    paid = models.BooleanField(_('Pago'), default=False)
 
     class Meta:
         ordering = ['created_at']
