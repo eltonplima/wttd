@@ -22,6 +22,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+SOUTH_TESTS_MIGRATE = False
+
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '.herokuapp.com']
@@ -37,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
+    'south',
     '%s.core' % PROJECT_NAME,
     '%s.subscriptions' % PROJECT_NAME,
 )
